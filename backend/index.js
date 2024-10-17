@@ -6,12 +6,7 @@ const cors = require('cors');
 
 const app = express();
 
-// Load environment variables
-// require('dotenv').config();
-
-// Connect to MongoDB
-connectDB();
-
+connectDB();  // Connect to MongoDB
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -22,10 +17,7 @@ app.use('/api/rules', router);
 app.get('/', (req, res) => {
   res.send('API is running');
 });
-
 const PORT = 5004;
-
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-

@@ -54,7 +54,7 @@ function shuntingYard(rule) {
                         while (stack[stack.length - 1] !== '(') {
                             postfixExpr.push(stack.pop());
                         }
-                        stack.pop(); // remove the (
+                        stack.pop(); 
                     } else {
                         while (stack.length > 0 && curroper <= PRECEDENCE[stack[stack.length - 1]]) {
                             postfixExpr.push(stack.pop());
@@ -132,8 +132,7 @@ const combineRules = async (req, res) => {
             }
         }
 
-        // Combine the rules
-        let combinedAST = null;
+        let combinedAST = null;     // Combine the rules
         for (let rule of rules) {
             const postfixExpr = shuntingYard(rule);
             const root = await createAST(postfixExpr);
@@ -156,7 +155,7 @@ const combineRules = async (req, res) => {
                 ruleName: rule_name,
                 rule: rules.join(' AND '),
                 root: combinedAST._id,
-                postfixExpr: [] // The combined rule doesn't have a single postfix expression
+                postfixExpr: [] // The combined rule does not have a single postfix expression
             });
             await newRule.save();
             res.status(201).send({ message: 'Rules combined successfully', rule: newRule });
@@ -168,5 +167,4 @@ const combineRules = async (req, res) => {
         res.status(500).send({ error: "Internal Server Error", details: error.message });
     }
 };
-
 module.exports = { combineRules };

@@ -7,7 +7,7 @@ const createRule = async (req, res) => {
         console.log(!rule_name);
         console.log(rule_name.length>0);
 
-        //Validate Input
+        //Input validation
         if (rule_name.length <=0) {
             return res.status(400).send({ error: "rule_name can't be null or length can't be zero" })
         }
@@ -26,7 +26,7 @@ const createRule = async (req, res) => {
             return res.status(400).send({ error: "Rule with the same name already exists." });
         }
 
-        //Shunting Yard Algorith
+        //Using Shunting Yard Algorithm
         const PRECEDENCE = {
             '(': -1,
             ')': -1,
@@ -80,7 +80,7 @@ const createRule = async (req, res) => {
                                 while (stack[stack.length - 1] !== '(') {
                                     postfixExpr.push(stack.pop());
                                 }
-                                stack.pop(); // remove the (
+                                stack.pop(); 
                             } else {
                                 while (stack.length > 0 && curroper <= PRECEDENCE[stack[stack.length - 1]]) {
                                     postfixExpr.push(stack.pop());
@@ -102,8 +102,8 @@ const createRule = async (req, res) => {
 
             return postfixExpr;
         }
-        //Convet POSTFIX to AST
-
+        
+        //Convert POSTFIX to AST
         async function createAST(postfixExpr) {
             const nodestack = [];
             console.log(`Postfix: ${postfixExpr}`);
@@ -154,6 +154,4 @@ const validateRule = (rule) => {
     const rulePattern = /\w+\s*(<|>|=|<=|>=)\s*('[^']*'|\w+)\s*(AND|OR)\s*\w+\s*(<|>|=|<=|>=)\s*('[^']*'|\w+)/i;
     return rulePattern.test(rule);
 };
-
-
 module.exports = { createRule };

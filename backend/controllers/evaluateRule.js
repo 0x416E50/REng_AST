@@ -1,7 +1,6 @@
 const Node = require('../models/nodeSchema');
 const Rule = require('../models/ruleSchema');
 
-
 class ASTNode {
     constructor(elemType, value, left = null, right = null) {
         this.elemType = elemType;
@@ -16,7 +15,7 @@ const ElemType = {
     LOGICAL:1,
 };
 
-// Function to reconstruct the AST from MongoDB
+// AST reconstruction from MongoDB
 const reconstructAST = async (nodeId) => {
     try {
         if (!nodeId) {
@@ -75,14 +74,12 @@ const evaluateAST = (node, conditions) => {
                 return leftEval || rightEval;
             }
         }
-
         return true;
     } catch (error) {
         console.error('Error evaluating AST:', error);
         throw new Error('Failed to evaluate AST');
     }
 };
-
 
 // Controller function to find and evaluate the rule
 const evaluateRule = async (req, res) => {
@@ -96,13 +93,13 @@ const evaluateRule = async (req, res) => {
                 return res.status(404).send({ error: "Rule not found" });
             }
 
-            // Reconstruct the AST from the rule
+            // AST reconstruction by rule
             const rootNode = await reconstructAST(rule.root);
             if (!rootNode) {
                 return res.status(500).send({ error: "Failed to reconstruct AST" });
             }
 
-            // Evaluate the AST with the given conditions
+            // AST evaluation following given conditions
             const evaluationResult = evaluateAST(rootNode, conditions);
             console.log('Evaluation Result:', evaluationResult);
 
