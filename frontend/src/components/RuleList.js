@@ -9,7 +9,7 @@ const RuleList = () => {
   useEffect(() => {
     const fetchRules = async () => {
       try {
-        const response = await axios.get('https://rule-engine-with-ast-1.onrender.com/api/rules/getRules');
+        const response = await axios.get('https://reng-rst.onrender.com/api/rules/getRules');
         setRules(response.data);
         setIsLoading(false);
       } catch (error) {
