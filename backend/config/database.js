@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Load environment variables from .env file
-const MONGO_URI="mongodb://127.0.0.1:27017/ruleengine"
+const MONGO_URI="mongodb+srv://silkoul6:oFIEiKEUaMeedzPh@cluster0.7xa1b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 const connectDB = async () => {
   try {
