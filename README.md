@@ -1,9 +1,8 @@
 # Rule Engine with AST
 
-
 [![Project link]()](https://r-eng-rst.vercel.app/)
 
-## Objective
+## Problem
 
 A simple 3-tier rule engine application (Simple UI, API, and Backend, Data) to determine user eligibility based on attributes like age, department, income, spend, etc. The system uses an Abstract Syntax Tree (AST) to represent conditional rules, allowing for dynamic creation, combination, and modification of these rules.
 
@@ -19,6 +18,9 @@ A data structure to represent the AST. The data structure should allow rule chan
 ## Data Storage
 
 The choice of database for storing the above rules and application metadata. MongoDB is a suitable choice for its flexibility and JSON-like documents.
+## Requirements:
+- MongoDB URI for backend deployment
+- Knowledge about Abstract Syntax Tree and Shunting yard algorithm. 
 
 ### Schema Example
 
@@ -34,24 +36,16 @@ The choice of database for storing the above rules and application metadata. Mon
 
 ##API Design
 
-## 1.create_rule(rule_string) 
-
+### 1. `create_rule(rule_string)` 
 -This function takes a string representing a rule (as shown in the examples) and returns a Node object representing the corresponding AST. The Shunting Yard algorithm is used to convert the rule string into a postfix expression, which is then used to construct the AST.
-![create_rule logical diagram](create_rule.png)
 
 ### 2. `combine_rules(rules)`
 This function takes a list of rule strings and combines them into a single AST. The function concatenates the rules using the AND operator to form a combined rule. The combined rule is then converted into an AST and returned as the root node of the combined AST.
 
 ```javascript
-function combine_rules(rules) {
-  // Concatenate all rules using the AND operator
-  const combinedRuleString = rules.join(' AND ');
-
-  // Convert the combined rule string to AST
-  return create_rule(combinedRuleString);
-}
+    const combinedRuleString = rules.join(' AND ');    // Concatenate all rules using AND operator
+    return create_rule(combinedRuleString);    // Convert the combined rule string to AST
 ```
-![combine_rule logical diagram](combine_rule.png)
 
 ## 3. AST Evaluation Controller
 
@@ -61,7 +55,7 @@ This controller provides functionality to evaluate rules stored in MongoDB using
 ## cloning repo
 
 ```bash
-git clone https://github.com/your-repo/repository.git
+git clone https://github.com//0x416E50/REng_AST.git
 ```
 
 ## Backend Setup
@@ -69,11 +63,11 @@ git clone https://github.com/your-repo/repository.git
 To set up the backend for the rule engine application, follow these steps:
 
    ```bash
-   cd repository/backend
-   npm i
+   cd repo/backend
+   npm install
    node index.js
    ```
-don't forget to add ur MONGO_URL
+Replace the Mongo_URI with 
 
 
 ## frontend Setup
@@ -81,14 +75,9 @@ don't forget to add ur MONGO_URL
 To set up the frontend for the rule engine application, follow these steps:
 
    ```bash
-   cd repository/frontend
-   npm i
+   cd repo/frontend
+   npm install
    node start
    ```
 
-  ## Hosting
- -Backend: Hosted on Render
--Frontend: Hosted on Netlify
-
-
-
+_Made by @0x416E50_ 
